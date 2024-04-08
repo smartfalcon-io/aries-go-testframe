@@ -1,0 +1,116 @@
+#
+# Copyright SecureKey Technologies Inc. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+version: '2'
+
+services:
+
+  router.agent.aries.js.example.com:
+    container_name: router.agent.aries.js.example.com
+    image: ${E2E_AGENT_REST_IMAGE}:${E2E_AGENT_REST_IMAGE_TAG}
+    environment:
+      - ARIESD_API_HOST=${E2E_ROUTER_HOST}:${E2E_ROUTER_API_PORT}
+      - ARIESD_INBOUND_HOST=${E2E_HTTP_SCHEME}@${E2E_ROUTER_HOST}:${E2E_ROUTER_HTTP_INBOUND_PORT},${E2E_WS_SCHEME}@${E2E_ROUTER_HOST}:${E2E_ROUTER_WS_INBOUND_PORT}
+      - ARIESD_INBOUND_HOST_EXTERNAL=${E2E_HTTP_SCHEME}@http://localhost:${E2E_ROUTER_HTTP_INBOUND_PORT},${E2E_WS_SCHEME}@ws://localhost:${E2E_ROUTER_WS_INBOUND_PORT}
+      - ARIESD_DATABASE_TYPE=mem
+      - ARIESD_DEFAULT_LABEL=carl-router-agent
+      - ARIESD_OUTBOUND_TRANSPORT=${E2E_HTTP_SCHEME},${E2E_WS_SCHEME}
+      - ARIESD_AUTO_ACCEPT=${E2E_ROUTER_AUTOACCEPT}
+      - ARIESD_LOG_LEVEL=DEBUG
+      - ARIESD_MEDIA_TYPE_PROFILES=${E2E_USER_MEDIA_TYPE_PROFILES}
+    ports:
+      - ${E2E_ROUTER_HTTP_INBOUND_PORT}:${E2E_ROUTER_HTTP_INBOUND_PORT}
+      - ${E2E_ROUTER_WS_INBOUND_PORT}:${E2E_ROUTER_WS_INBOUND_PORT}
+      - ${E2E_ROUTER_API_PORT}:${E2E_ROUTER_API_PORT}
+    command: start
+    depends_on:
+      - file-server.js.example.com
+
+  second.user.agent.aries.js.example.com:
+    container_name: second.user.agent.aries.js.example.com
+    image: ${E2E_AGENT_REST_IMAGE}:${E2E_AGENT_REST_IMAGE_TAG}
+    environment:
+      - ARIESD_API_HOST=${E2E_SECOND_USER_HOST}:${E2E_SECOND_USER_API_PORT}
+      - ARIESD_INBOUND_HOST=${E2E_HTTP_SCHEME}@${E2E_SECOND_USER_HOST}:${E2E_SECOND_USER_INBOUND_PORT}
+      - ARIESD_INBOUND_HOST_EXTERNAL=${E2E_HTTP_SCHEME}@http://second.user.agent.aries.js.example.com:${E2E_SECOND_USER_INBOUND_PORT}
+      - ARIESD_DEFAULT_LABEL=second-user-agent
+      - ARIESD_DATABASE_TYPE=mem
+      - ARIESD_AUTO_ACCEPT=${E2E_SECOND_USER_AUTOACCEPT}
+      - ARIESD_OUTBOUND_TRANSPORT=${E2E_HTTP_SCHEME},${E2E_WS_SCHEME}
+      - ARIESD_LOG_LEVEL=DEBUG
+      - ARIESD_HTTP_RESOLVER=${HTTP_DID_RESOLVER}
+      - ARIESD_CONTEXT_PROVIDER_URL=${CONTEXT_PROVIDER_URL}
+      - ARIESD_MEDIA_TYPE_PROFILES=${E2E_USER_MEDIA_TYPE_PROFILES}
+    ports:
+      - ${E2E_SECOND_USER_INBOUND_PORT}:${E2E_SECOND_USER_INBOUND_PORT}
+      - ${E2E_SECOND_USER_API_PORT}:${E2E_SECOND_USER_API_PORT}
+    command: start
+    depends_on:
+      - file-server.js.example.com
+
+  third.user.agent.aries.js.example.com:
+    container_name: third.user.agent.aries.js.example.com
+    image: ${E2E_AGENT_REST_IMAGE}:${E2E_AGENT_REST_IMAGE_TAG}
+    environment:
+      - ARIESD_API_HOST=${E2E_THIRD_USER_HOST}:${E2E_THIRD_USER_API_PORT}
+      - ARIESD_INBOUND_HOST=${E2E_HTTP_SCHEME}@${E2E_THIRD_USER_HOST}:${E2E_THIRD_USER_INBOUND_PORT}
+      - ARIESD_INBOUND_HOST_EXTERNAL=${E2E_HTTP_SCHEME}@http://third.user.agent.aries.js.example.com:${E2E_THIRD_USER_INBOUND_PORT}
+      - ARIESD_DEFAULT_LABEL=third-user-agent
+      - ARIESD_DATABASE_TYPE=mem
+      - ARIESD_AUTO_ACCEPT=${E2E_THIRD_USER_AUTOACCEPT}
+      - ARIESD_OUTBOUND_TRANSPORT=${E2E_HTTP_SCHEME},${E2E_WS_SCHEME}
+      - ARIESD_LOG_LEVEL=DEBUG
+      - ARIESD_HTTP_RESOLVER=${HTTP_DID_RESOLVER}
+      - ARIESD_CONTEXT_PROVIDER_URL=${CONTEXT_PROVIDER_URL}
+      - ARIESD_MEDIA_TYPE_PROFILES=${E2E_USER_MEDIA_TYPE_PROFILES}
+    ports:
+      - ${E2E_THIRD_USER_INBOUND_PORT}:${E2E_THIRD_USER_INBOUND_PORT}
+      - ${E2E_THIRD_USER_API_PORT}:${E2E_THIRD_USER_API_PORT}
+    command: start
+    depends_on:
+      - file-server.js.example.com
+
+  user.agent.aries.js.example.com:
+    container_name: user.agent.aries.js.example.com
+    image: ${E2E_AGENT_REST_IMAGE}:${E2E_AGENT_REST_IMAGE_TAG}
+    environment:
+      - ARIESD_API_HOST=${E2E_USER_HOST}:${E2E_USER_API_PORT}
+      - ARIESD_INBOUND_HOST=${E2E_HTTP_SCHEME}@${E2E_USER_HOST}:${E2E_USER_INBOUND_PORT}
+      - ARIESD_INBOUND_HOST_EXTERNAL=${E2E_HTTP_SCHEME}@http://user.agent.aries.js.example.com:${E2E_USER_INBOUND_PORT}
+      - ARIESD_DEFAULT_LABEL=user-agent
+      - ARIESD_DATABASE_TYPE=mem
+      - ARIESD_AUTO_ACCEPT=${E2E_USER_AUTOACCEPT}
+      - ARIESD_OUTBOUND_TRANSPORT=${E2E_HTTP_SCHEME},${E2E_WS_SCHEME}
+      - ARIESD_LOG_LEVEL=DEBUG
+      - ARIESD_HTTP_RESOLVER=${HTTP_DID_RESOLVER}
+      - ARIESD_CONTEXT_PROVIDER_URL=${CONTEXT_PROVIDER_URL}
+      - ARIESD_MEDIA_TYPE_PROFILES=${E2E_USER_MEDIA_TYPE_PROFILES}
+    ports:
+      - ${E2E_USER_INBOUND_PORT}:${E2E_USER_INBOUND_PORT}
+      - ${E2E_USER_API_PORT}:${E2E_USER_API_PORT}
+    command: start
+    depends_on:
+      - file-server.js.example.com
+
+  sidetree.aries.js.example.com:
+    container_name: sidetree.aries.js.example.com
+    image: ${SIDETREE_MOCK_FIXTURE_IMAGE}:${SIDETREE_MOCK_FIXTURE_IMAGE_TAG}
+    environment:
+      - SIDETREE_MOCK_HOST=0.0.0.0
+      - SIDETREE_MOCK_PORT=48326
+      - SIDETREE_MOCK_DID_NAMESPACE=did:sidetree:test
+    ports:
+      - 48326:48326
+
+  file-server.js.example.com: # file server for hosting static resources (e.g. JSON-LD contexts)
+    container_name: file-server.js.example.com
+    image: halverneus/static-file-server:latest
+    environment:
+      - PORT=10096
+      - FOLDER=/data
+    ports:
+      - "10096:10096"
+    volumes:
+      - ./data:/data

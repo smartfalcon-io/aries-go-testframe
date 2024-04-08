@@ -1,0 +1,25 @@
+{
+  "name": "karma-seed",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "bash src/build_wasm.sh && mocha"
+  },
+  "devDependencies": {
+    "axios": "0.21.1",
+    "chai": "4.2.0",
+    "dotenv": "8.2.0",
+    "karma": "^6.1.1",
+    "karma-chai": "0.1.0",
+    "karma-chrome-launcher": "3.1.0",
+    "karma-mocha": "^2.0.1",
+    "karma-spec-reporter": "0.0.32",
+    "mocha": "^8.3.0",
+    "puppeteer": "2.1.1"
+  },
+  "dependencies": {
+    "@mattrglobal/jsonld-signatures-bbs": "0.8.0",
+    "jsonld": "3.1.0",
+    "jsonld-signatures": "^7.0.0"
+  }
+}

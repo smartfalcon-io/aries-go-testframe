@@ -1,0 +1,19 @@
+# Copyright SecureKey Technologies Inc. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+coverage:
+  status:
+    project:
+      default:
+        target: 85%
+    patch:
+      default:
+        target: 85%
+        only_pulls: true
+
+ignore:
+  - "test/bdd"  # ignore bdd tests
+  - "proto"
+  - "component/kmscrypto/crypto/tinkcrypto/primitive/proto"
+  - "component/kmscrypto/internal/third_party"
