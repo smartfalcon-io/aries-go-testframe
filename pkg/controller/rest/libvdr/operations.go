@@ -4,7 +4,7 @@ Copyright SecureKey Technologies Inc. All Rights Reserved.
 SPDX-License-Identifier: Apache-2.0
 */
 
-package vdr
+package libvdr
 
 import (
 
@@ -16,21 +16,19 @@ import (
 	"github.com/hyperledger/aries-framework-go/pkg/controller/internal/cmdutil"
 	"github.com/hyperledger/aries-framework-go/pkg/controller/rest"
 	vdrapi "github.com/hyperledger/aries-framework-go/pkg/framework/aries/api/libvdr"
-	"github.com/hyperledger/aries-framework-go/spi/storage"
 )
 
 // constants for the VDR operations.
 const (
 	VDROperationID    = "/libvdr"
 	// vdrDIDPath        = VDROperationID + "/did"
-	CreateSchema     = VDROperationID + "/createschema"
+	CreateSchema     = VDROperationID + "/create"
 )
 
 // provider contains dependencies for the common controller operations
 // and is typically created by using aries.Context().
 type provider interface {
 	VDRegistry() vdrapi.Registry
-	StorageProvider() storage.Provider
 }
 
 // Operation contains basic common operations provided by controller REST API.

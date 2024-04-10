@@ -20,6 +20,7 @@ import (
 	"github.com/hyperledger/aries-framework-go/pkg/controller/command/kms"
 	ldcmd "github.com/hyperledger/aries-framework-go/pkg/controller/command/ld"
 	legacyconncmd "github.com/hyperledger/aries-framework-go/pkg/controller/command/legacyconnection"
+	libvdrcmd "github.com/hyperledger/aries-framework-go/pkg/controller/command/libindy-vdr"
 	routercmd "github.com/hyperledger/aries-framework-go/pkg/controller/command/mediator"
 	messagingcmd "github.com/hyperledger/aries-framework-go/pkg/controller/command/messaging"
 	outofbandcmd "github.com/hyperledger/aries-framework-go/pkg/controller/command/outofband"
@@ -47,6 +48,8 @@ import (
 	"github.com/hyperledger/aries-framework-go/pkg/controller/webnotifier"
 	"github.com/hyperledger/aries-framework-go/pkg/framework/context"
 	ldsvc "github.com/hyperledger/aries-framework-go/pkg/ld"
+	libvdrrest "github.com/hyperledger/aries-framework-go/pkg/controller/rest/libvdr"
+
 )
 
 // HTTPClient represents an HTTP client.
@@ -171,6 +174,12 @@ func GetRESTHandlers(ctx *context.Provider, opts ...Opt) ([]rest.Handler, error)
 		return nil, err
 	}
 
+	// LIBVDR REST operation
+	libvdrOp, err := libvdrrest.New(ctx)
+	if err != nil {
+		return nil, err
+	}
+
 	// messaging REST operation
 	messagingOp, err := messagingrest.New(ctx, restAPIOpts.msgHandler, notifier)
 	if err != nil {
@@ -259,6 +268,7 @@ func GetRESTHandlers(ctx *context.Provider, opts ...Opt) ([]rest.Handler, error)
 	allHandlers = append(allHandlers, wallet.GetRESTHandlers()...)
 	allHandlers = append(allHandlers, ldOp.GetRESTHandlers()...)
 	allHandlers = append(allHandlers, connOp.GetRESTHandlers()...)
+	allHandlers = append(allHandlers, libvdrOp.GetRESTHandlers()...)
 
 	nhp, ok := notifier.(handlerProvider)
 	if ok {
@@ -305,6 +315,12 @@ func GetCommandHandlers(ctx *context.Provider, opts ...Opt) ([]command.Handler, 
 
 	// VDR command operation
 	vcmd, err := vdrcmd.New(ctx)
+	if err != nil {
+		return nil, err
+	}
+
+	// LIBVDR command operation
+	libvcmd, err := libvdrcmd.New(ctx)
 	if err != nil {
 		return nil, err
 	}

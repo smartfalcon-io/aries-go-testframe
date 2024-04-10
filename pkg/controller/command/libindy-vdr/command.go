@@ -45,7 +45,7 @@ const (
 
 const (
 	// command name.
-	CommandName = "Libvdr"
+	CommandName = "libvdr"
 
 	// command methods.
 	CreateSchemaCommandMethod  = "CreateSchema"

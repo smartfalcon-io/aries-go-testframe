@@ -28,7 +28,6 @@ var ErrNotFound = errors.New("Unable to Create Schema")
 
 // Registry vdr registry.
 type Registry interface {
-	Read(schemaid string,genesis string) (string,error)
 	Create(trusteeseed string, schema interface{}, genesis string) (string, error)
 	Close() error
 }
@@ -36,7 +35,6 @@ type Registry interface {
 // VDR verifiable data registry interface.
 // TODO https://github.com/hyperledger/aries-framework-go/issues/2475
 type Libvdr interface {
-	Read(schemaid string,genesis string) (string,error)
 	Create(trusteeseed string, schema interface{}, genesis string) (string, error)
 	Close() error
 }

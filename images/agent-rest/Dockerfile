@@ -7,11 +7,11 @@
 ARG GO_VER
 ARG ALPINE_VER
 
-ARG GO_VER=1.20
-ARG ALPINE_VER=latest
+# ARG GO_VER=1.20
+# ARG ALPINE_VER=latest
 
-# FROM golang:${GO_VER}-alpine${ALPINE_VER} as golang
-FROM golang:1.20-alpine as golang
+FROM golang:${GO_VER}-alpine${ALPINE_VER} as golang
+# FROM golang:1.20-alpine as golang
 RUN apk add --no-cache \
 	gcc \
 	musl-dev \
@@ -28,6 +28,8 @@ LABEL org.opencontainers.image.source https://github.com/hyperledger/aries-frame
 
 ARG GO_TAGS
 ARG GOPROXY
+
+
 RUN GO_TAGS=${GO_TAGS} GOPROXY=${GOPROXY} make agent-rest
 
 
