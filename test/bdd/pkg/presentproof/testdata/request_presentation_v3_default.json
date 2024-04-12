@@ -1,4 +1,0 @@
-{
-  "type":"https://didcomm.org/present-proof/3.0/request-presentation",
-  "body": { "will_confirm":true }
-}
