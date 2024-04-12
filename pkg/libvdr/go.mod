@@ -1,4 +1,4 @@
-module github.com/hyperledger/indy-vdr/wrappers/golang
+module github.com/shanmukh-777/aries-go-testframe/
 
 go 1.16
 

@@ -19,7 +19,7 @@ import (
 	"github.com/hyperledger/aries-framework-go/pkg/crypto"
 	vdrapi "github.com/hyperledger/aries-framework-go/pkg/framework/aries/api/libvdr"
 	"github.com/hyperledger/aries-framework-go/pkg/internal/logutil"
-	"github.com/hyperledger/aries-framework-go/pkg/libvdr/vdr"
+	"github.com/shanmukh-777/aries-go-testframe/pkg/libvdr/vdr"
 	"github.com/hyperledger/aries-framework-go/pkg/libvdr/identifiers"
 	"github.com/hyperledger/aries-framework-go/pkg/libvdr/vdr"
 )
