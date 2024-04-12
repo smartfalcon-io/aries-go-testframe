@@ -23,6 +23,7 @@ import (
 	"github.com/hyperledger/aries-framework-go/pkg/didcomm/transport"
 	"github.com/hyperledger/aries-framework-go/pkg/framework/aries/api"
 	vdrapi "github.com/hyperledger/aries-framework-go/pkg/framework/aries/api/vdr"
+	libvdrapi "github.com/hyperledger/aries-framework-go/pkg/framework/aries/api/libvdr"
 	"github.com/hyperledger/aries-framework-go/pkg/kms"
 	"github.com/hyperledger/aries-framework-go/pkg/secretlock"
 	"github.com/hyperledger/aries-framework-go/pkg/store/connection"
@@ -55,6 +56,7 @@ type Provider struct {
 	messenger                  service.MessengerHandler
 	outboundTransports         []transport.OutboundTransport
 	vdr                        vdrapi.Registry
+	libvdr                     libvdrapi.LibRegistry
 	verifiableStore            verifiable.Store
 	didConnectionStore         did.ConnectionStore
 	contextStore               ld.ContextStore
@@ -255,6 +257,11 @@ func (p *Provider) ProtocolStateStorageProvider() storage.Provider {
 // VDRegistry returns a vdr registry.
 func (p *Provider) VDRegistry() vdrapi.Registry {
 	return p.vdr
+}
+
+// LIBVDRegistry returns a libvdr registry.
+func (p *Provider) LIBVDRegistry() libvdrapi.LibRegistry {
+	return p.libvdr
 }
 
 // TransportReturnRoute returns transport return route.

@@ -404,6 +404,7 @@ func GetCommandHandlers(ctx *context.Provider, opts ...Opt) ([]command.Handler, 
 	allHandlers = append(allHandlers, conncmd.GetHandlers()...)
 	allHandlers = append(allHandlers, wallet.GetHandlers()...)
 	allHandlers = append(allHandlers, ldCmd.GetHandlers()...)
+	allHandlers = append(allHandlers, libvcmd.GetHandlers()...)
 
 	return allHandlers, nil
 }

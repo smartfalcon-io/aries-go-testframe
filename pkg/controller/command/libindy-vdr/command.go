@@ -16,11 +16,12 @@ import (
 	"github.com/hyperledger/aries-framework-go/pkg/common/log"
 	"github.com/hyperledger/aries-framework-go/pkg/controller/command"
 	"github.com/hyperledger/aries-framework-go/pkg/controller/internal/cmdutil"
+	"github.com/hyperledger/aries-framework-go/pkg/crypto"
 	vdrapi "github.com/hyperledger/aries-framework-go/pkg/framework/aries/api/libvdr"
 	"github.com/hyperledger/aries-framework-go/pkg/internal/logutil"
-	"github.com/hyperledger/indy-vdr/wrappers/golang/crypto"
-	"github.com/hyperledger/indy-vdr/wrappers/golang/identifiers"
-	"github.com/hyperledger/indy-vdr/wrappers/golang/vdr"
+	"github.com/hyperledger/aries-framework-go/pkg/libvdr/vdr"
+	"github.com/hyperledger/aries-framework-go/pkg/libvdr/identifiers"
+	"github.com/hyperledger/aries-framework-go/pkg/libvdr/vdr"
 )
 
 var logger = log.New("aries-framework/command/libvdr")
@@ -60,7 +61,7 @@ const (
 )
 
 type provider interface {
-	VDRegistry() vdrapi.Registry
+	LIBVDRegistry() vdrapi.LibRegistry
 }
 
 // Command contains command operations provided by vdr controller.

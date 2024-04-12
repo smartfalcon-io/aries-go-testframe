@@ -28,7 +28,7 @@ const (
 // provider contains dependencies for the common controller operations
 // and is typically created by using aries.Context().
 type provider interface {
-	VDRegistry() vdrapi.Registry
+	LIBVDRegistry() vdrapi.LibRegistry
 }
 
 // Operation contains basic common operations provided by controller REST API.

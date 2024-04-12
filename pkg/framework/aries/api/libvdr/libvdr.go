@@ -14,7 +14,7 @@ import (
 var ErrNotFound = api.ErrNotFound
 
 // Registry vdr registry.
-type Registry = api.Registry
+type LibRegistry = api.LibRegistry
 
 // VDR verifiable data registry interface.
 // TODO https://github.com/hyperledger/aries-framework-go/issues/2475

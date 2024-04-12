@@ -27,7 +27,7 @@ var ErrNotFound = errors.New("Unable to Create Schema")
 // )
 
 // Registry vdr registry.
-type Registry interface {
+type LibRegistry interface {
 	Create(trusteeseed string, schema interface{}, genesis string) (string, error)
 	Close() error
 }
