@@ -22,7 +22,10 @@ import (
 const (
 	VDROperationID    = "/libvdr"
 	// vdrDIDPath        = VDROperationID + "/did"
-	CreateSchema     = VDROperationID + "/create"
+	CreateSchema     = VDROperationID + "/createschema"
+	Getschema        = VDROperationID + "/getschema"
+	CreateCredDef     = VDROperationID + "/createcred-def"
+	GetCredDef       = VDROperationID + "/getcred-def"
 )
 
 // provider contains dependencies for the common controller operations
@@ -61,6 +64,9 @@ func (o *Operation) registerHandler() {
 	o.handlers = []rest.Handler{
 
 		cmdutil.NewHTTPHandler(CreateSchema, http.MethodPost, o.CreateSchema),
+		cmdutil.NewHTTPHandler(Getschema, http.MethodGet, o.GetSchema),
+		cmdutil.NewHTTPHandler(CreateCredDef, http.MethodPost, o.CreateCredDef),
+		cmdutil.NewHTTPHandler(GetCredDef, http.MethodGet, o.GetCredDef),
 	}
 }
 
@@ -73,4 +79,16 @@ func (o *Operation) registerHandler() {
 //        200: documentRes
 func (o *Operation) CreateSchema(rw http.ResponseWriter, req *http.Request) {
 	rest.Execute(o.command.CreateSchema, rw, req.Body)
+}
+
+func (o *Operation) GetSchema(rw http.ResponseWriter, req *http.Request) {
+	rest.Execute(o.command.GetSchema, rw, req.Body)
+}
+
+func (o *Operation) CreateCredDef(rw http.ResponseWriter, req *http.Request) {
+	rest.Execute(o.command.CreateCredDef, rw, req.Body)
+}
+
+func (o *Operation) GetCredDef(rw http.ResponseWriter, req *http.Request) {
+	rest.Execute(o.command.GetCredDef, rw, req.Body)
 }
