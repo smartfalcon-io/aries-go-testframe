@@ -1,4 +1,4 @@
-package crypto
+package indylibvdr
 
 import (
 	"crypto/ed25519"

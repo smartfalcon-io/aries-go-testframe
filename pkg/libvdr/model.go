@@ -1,4 +1,4 @@
-package vdr
+package indylibvdr
 
 type PoolStatus struct {
 	Root  string   `json:"mt_root"`

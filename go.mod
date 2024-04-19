@@ -31,6 +31,7 @@ require (
 	github.com/hyperledger/aries-framework-go/spi v0.0.0-20230517133327-301aa0597250
 	github.com/hyperledger/ursa-wrapper-go v0.3.1
 	github.com/mitchellh/mapstructure v1.5.0
+	github.com/mr-tron/base58 v1.2.0
 	github.com/multiformats/go-multibase v0.1.1
 	github.com/piprate/json-gold v0.5.1-0.20230111113000-6ddbe6e6f19f
 	github.com/pkg/errors v0.9.1
@@ -49,7 +50,6 @@ require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/hyperledger/fabric-amcl v0.0.0-20230602173724-9e02669dceb2 // indirect
-	github.com/hyperledger/indy-vdr/wrappers/golang v0.0.0-20240408123442-fbe4b57c6e46
 	github.com/jinzhu/copier v0.0.0-20190924061706-b57f9002281a // indirect
 	github.com/kawamuray/jsonpath v0.0.0-20201211160320-7483bafabd7e // indirect
 	github.com/kilic/bls12-381 v0.1.1-0.20210503002446-7b7597926c69 // indirect
@@ -57,7 +57,6 @@ require (
 	github.com/minio/blake2b-simd v0.0.0-20160723061019-3f5f724cb5b1 // indirect
 	github.com/minio/sha256-simd v0.1.1 // indirect
 	github.com/mmcloughlin/addchain v0.4.0 // indirect
-	github.com/mr-tron/base58 v1.2.0
 	github.com/multiformats/go-base32 v0.1.0 // indirect
 	github.com/multiformats/go-base36 v0.1.0 // indirect
 	github.com/multiformats/go-multihash v0.0.13 // indirect
@@ -83,3 +82,7 @@ require (
 )
 
 replace github.com/hyperledger/aries-framework-go/component/models => ./component/models
+
+// replace github.com/hyperledger/aries-framework-go/pkg/golang => ./pkg/golang
+
+replace github.com/hyperledger/aries-framework-go/pkg/controller/command/libindy-vdr => ./pkg/controller/command/libindy-vdr

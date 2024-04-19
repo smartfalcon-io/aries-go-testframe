@@ -1,4 +1,4 @@
-package vdr
+package indylibvdr
 
 import (
 	"encoding/json"

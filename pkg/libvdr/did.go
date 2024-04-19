@@ -1,4 +1,4 @@
-package identifiers
+package indylibvdr
 
 import "C"
 import (
